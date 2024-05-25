@@ -3,10 +3,24 @@
 {% load carts_tags %}
 
 {% block content %}
-<div class="row">
+<style>
+.bg-blue {
+    background-color: #007bff; /* Цвет фона: голубой */
+    /* Дополнительные стили для фона, если необходимо */
+}
+
+.custom-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Настройка тени, если нужно */
+}
+</style>
+<div class="row bg-blue">
+    <div class="contain">
+        <br>
+        <br>
     <div class="container mt-5">
         <div class="row">
             <!-- Профиль с данными пользователя -->
+
             <div class="col-md-5">
                 <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
                     <h3 class="text-center mb-4">Профиль пользователя</h3>

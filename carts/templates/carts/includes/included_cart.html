@@ -1,16 +1,26 @@
 {% load static %}
+<style>
+.bg-blue {
+    background-color: #007bff; /* Цвет фона: голубой */
+    /* Дополнительные стили для фона, если необходимо */
+}
 
-<div class="card mb-3 text-bg-light shadow-lg">
+.custom-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Настройка тени, если нужно */
+}
+</style>
+
+<div class="card mb-3 text-bg-light shadow-lg bg-blue">
     {% for cart in carts %}
-        <div class="card-header">
+        <div class="card-header bg-blue">
             <h5 class="card-title">{{ cart.product.name }}</h5>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <div class="row text-center">
                     <div class="col p-0">
-                        <div class="input-group">
-                            <span class="input-group-btn">
+                        <div class="input-group ">
+                            <span class="input-group-btn ">
                                 <button type="button" class="btn btn-dark btn-sm decrement"
                                     data-cart-id="{{ cart.id }}"
                                     data-cart-change-url="{% url "cart:cart_change" %}">
@@ -56,3 +66,7 @@
     Оформить заказ
 </a>
 {% endif %}
+
+    <script src="{% static "deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
+    <script src="{% static "deps/js/jquery-ajax.js" %}"></script>
+    <script src="{% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}"></script>

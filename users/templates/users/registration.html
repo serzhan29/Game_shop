@@ -6,10 +6,27 @@
 {% endblock  %}
 
 {% block content %}
-<div class="row">
+<style>
+.bg-blue {
+    background-color: #007bff; /* Цвет фона: голубой */
+    /* Дополнительные стили для фона, если необходимо */
+}
+
+.custom-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Настройка тени, если нужно */
+}
+</style>
+<div class="row bg-blue">
     <div class="container mt-5">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <div class="row justify-content-center">
             <div class="col-md-9 bg-white p-4 mb-5 mx-2 rounded custom-shadow">
+
                 <h2 class="text-center mb-4">Регистрация</h2>
                 <form action="{% url "user:registration" %}" method="post">
                     {% csrf_token %}
@@ -78,8 +95,13 @@
                     <button type="submit"
                         class="btn btn-dark btn-block">Зарегистрироваться</button>
                 </form>
+
             </div>
+
         </div>
+        <br>
+        <br>
+        <br>
     </div>
 </div>
 {% endblock  %}

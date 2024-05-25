@@ -6,45 +6,113 @@
 {% endblock  %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="card mb-4 custom-shadow">
-        <div class="row">
-            <!-- Миниатюры -->
-            <div class="col-md-4">
-                <img src="{{ product.image.url }}"
-                    class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1">
-            </div>
-            <div class="col-md-4 ">
-                <p class="product_id mt-3">id: {{ product.display_id }}</p>
-            </div>
-            <!-- Увеличить изображение в модальном окне -->
-            <div class="modal fade" id="imageModal1" tabindex="-1"
-                aria-labelledby="imageModal1Label" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="imageModal1Label">{{ product.name }}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Закрыть"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img src="{{ product.image.url }}"
-                                class="img-fluid" alt="Изображение 1">
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>{{ product.name }}</h3>
         </div>
-        <!-- Описание товара -->
-        <div class="card-body">
-            <p class="card-text">Цена: <strong>{{ product.sell_price }} $</strong></p>
-            <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">{{ product.description }}</p>
-            <a href="{% url "cart:cart_add" %}" class="btn btn-dark add-to-cart"
-            data-product-id="{{ product.id }}">
-            {% csrf_token %}
-            Добавить в корзину</a>
-        </div>
+      </div>
     </div>
-</div>
+  </div>
+
+  <div class="single-product section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="left-image">
+            <img src="{{ product.image.url }}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6 align-self-center">
+          <h4>{{ product.name }}</h4>
+          <span class="price"><em>{{ product.price }}</em>{{ product.sell_price }}</span>
+          <p>{{ product.description }}</p>
+          <form action="{% url 'cart:cart_add' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ product.id }}">
+              <input type="hidden" name="next" value="{{ request.path }}">
+              <button type="submit">
+                  <i class="fa fa-shopping-bag"></i> ДОБАВИТЬ В КОРЗИНУ
+              </button>
+          </form>
+
+          <ul>
+            <li><span>ID ИГРЫ:</span>{{ product.id }}</li>
+            <li><span>ЖАНР:</span> <a href="#">{{ product.category }}</a>
+          </ul>
+        </div>
+        <div class="col-lg-12">
+          <div class="sep"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="more-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="tabs-content">
+            <div class="row">
+              <div class="nav-wrapper ">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Описание</button>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                    <p>{{ product.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="container">
+      <div class="col-lg-12">
+        <p>Copyright © 2024 Serzhan Private Company. All rights reserved. &nbsp;&nbsp; <a rel="nofollow" href="https://templatemo.com" target="_blank">Design: Serzhan</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+  <script src="{% static "vendor/js/bootstrap.min.js" %}"></script>
+  <script src="{% static "assets/js/isotope.min.js" %}"></script>
+  <script src="{% static "assets/js/owl-carousel.js" %}"></script>
+  <script src="{% static "assets/js/counter.js" %}"></script>
+  <script src="{% static "assets/js/custom.js" %}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("form").submit(function(event) {
+            // Предотвращаем стандартное действие отправки формы
+            event.preventDefault();
+
+            // Отправляем данные формы асинхронно
+            $.ajax({
+                type: $(this).attr("method"),
+                url: $(this).attr("action"),
+                data: $(this).serialize(),
+                success: function(response) {
+                    // Обновляем элемент корзины на странице
+                    $("#cart-items").html(response.cart_items_html);
+                    // Выводим сообщение о добавлении товара
+                    alert(response.message);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
 {% endblock  %}

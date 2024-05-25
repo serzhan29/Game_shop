@@ -4,9 +4,21 @@
 
 
 {% block content %}
+<style>
+.bg-blue {
+    background-color: #007bff; /* Цвет фона: голубой */
+    /* Дополнительные стили для фона, если необходимо */
+}
+
+.custom-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Настройка тени, если нужно */
+}
+</style>
 {% user_carts request as carts %}
-<div class="row">
+<div class="row bg-blue">
     <div class="container mt-5">
+            <br>
+            <br>
         <div class="row justify-content-center">
             <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
                 <h3 class="text-center mb-4">Корзина</h3>
@@ -17,6 +29,22 @@
                 </div>
             </div>
         </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
     </div>
 </div>
 {% endblock  %}

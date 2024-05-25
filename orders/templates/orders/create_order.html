@@ -3,9 +3,19 @@
 {% load carts_tags %}
 
 {% block content %}
-<div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
-    <div class="container">
-        <h3 class="text-center mb-4">Выбранные товары</h3>
+<style>
+.bg-blue {
+    background-color: #007bff; /* Цвет фона: голубой */
+    /* Дополнительные стили для фона, если необходимо */
+}
+
+.custom-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Настройка тени, если нужно */
+}
+</style>
+<br>
+<div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow  bg-blue">
+    <div class="container  bg-blue">
         <div class="container" id="cart-items-container">
             <!-- Разметка корзины -->
             {% user_carts request as carts %}
@@ -15,15 +25,15 @@
         </div>
     </div>
     <!-- Детали заказа -->
-    <div class="container">
-        <h3 class="text-center">Детали заказа</h3>
-        <div class="card mb-3">
+    <div class="container  bg-blue">
+        <h3 class="text-center  bg-blue">Детали заказа</h3>
+        <div class="card mb-3 ">
             <div class="card-body">
                 <form action="{% url "orders:create_order" %}" method="post">
                     {% csrf_token %}
-                    <div class="row">
+                    <div class="row ">
                         <div class="col-md-6 mb-3">
-                            <label for="id_first_name" class="form-label">Имя*:</label>
+                            <label for="id_first_name" class="form-label ">Имя*:</label>
                             <input type="text" class="form-control" id="id_first_name"
                                 value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
                                 name="first_name" required>

@@ -1,19 +1,29 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from goods.models import Categories
+from goods.models import Categories, Products
 
 
 def index(request):
-
-
+    products = Products.objects.all()[:8]
+    products_2 = Products.objects.all().order_by('-rating')[:6]
+    categories = Categories.objects.all()[:4]
     context = {
-        'title': 'Home - Главная',
-        'content': "Магазин мебели HOME",
+        'products': products,
+        'cat': categories,
+        'products_2' : products_2,
     }
-
     return render(request, 'main/index.html', context)
 
+
+def shop(request):
+    products = Products.objects.all()
+    categories = Categories.objects.all()
+    context = {
+        'products': products,
+        'cat': categories,
+    }
+    return render(request, 'goods/shop.html', context)
 
 def about(request):
     context = {
