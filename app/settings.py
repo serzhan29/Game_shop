@@ -21,7 +21,7 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
-CSRF_TRUSTED_ORIGINS = ['https://dfda-2-134-186-160.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://7dae-2-134-186-160.ngrok-free.app']
 # Application definition
 
 INSTALLED_APPS = [
